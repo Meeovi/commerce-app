@@ -69,7 +69,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     "nuxt-security",
     '@logto/nuxt',
-    '@vueform/nuxt',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
