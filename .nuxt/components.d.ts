@@ -1,6 +1,7 @@
 
 import type { DefineComponent, SlotsType } from 'vue'
-type IslandComponent<T extends DefineComponent> = T & DefineComponent<{}, {refresh: () => Promise<void>}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{ fallback: { error: unknown } }>>
+type IslandComponent<T> = DefineComponent<{}, {refresh: () => Promise<void>}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{ fallback: { error: unknown } }>> & T
+
 type HydrationStrategies = {
   hydrateOnVisible?: IntersectionObserverInit | true
   hydrateOnIdle?: number | true
@@ -10,325 +11,135 @@ type HydrationStrategies = {
   hydrateWhen?: boolean
   hydrateNever?: true
 }
-type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }>)
-interface _GlobalComponents {
-      'FooterNav': typeof import("../components/FooterNav.vue")['default']
-    'RelatedRelatedposts': typeof import("../components/Related/relatedposts.vue")['default']
-    'RelatedRelatedproducts': typeof import("../components/Related/relatedproducts.vue")['default']
-    'Search': typeof import("../components/Search/search.vue")['default']
-    'Ecosystemmenu': typeof import("../components/ecosystemmenu.vue")['default']
-    'NuxtWelcome': typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
-    'NuxtLayout': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
-    'NuxtErrorBoundary': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
-    'ClientOnly': typeof import("../../node_modules/nuxt/dist/app/components/client-only")['default']
-    'DevOnly': typeof import("../../node_modules/nuxt/dist/app/components/dev-only")['default']
-    'ServerPlaceholder': typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']
-    'NuxtLink': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-link")['default']
-    'NuxtLoadingIndicator': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']
-    'NuxtTime': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']
-    'NuxtRouteAnnouncer': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
-    'NuxtImg': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
-    'NuxtPicture': typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
-    'SfAccordionItem': typeof import("@storefront-ui/vue")['SfAccordionItem']
-    'SfBadge': typeof import("@storefront-ui/vue")['SfBadge']
-    'SfButton': typeof import("@storefront-ui/vue")['SfButton']
-    'SfCheckbox': typeof import("@storefront-ui/vue")['SfCheckbox']
-    'SfChip': typeof import("@storefront-ui/vue")['SfChip']
-    'SfCounter': typeof import("@storefront-ui/vue")['SfCounter']
-    'SfDrawer': typeof import("@storefront-ui/vue")['SfDrawer']
-    'SfDropdown': typeof import("@storefront-ui/vue")['SfDropdown']
-    'SfIconAdd': typeof import("@storefront-ui/vue")['SfIconAdd']
-    'SfIconAddShoppingCart': typeof import("@storefront-ui/vue")['SfIconAddShoppingCart']
-    'SfIconAlokai': typeof import("@storefront-ui/vue")['SfIconAlokai']
-    'SfIconAlokaiFull': typeof import("@storefront-ui/vue")['SfIconAlokaiFull']
-    'SfIconArrowBack': typeof import("@storefront-ui/vue")['SfIconArrowBack']
-    'SfIconArrowDownward': typeof import("@storefront-ui/vue")['SfIconArrowDownward']
-    'SfIconArrowForward': typeof import("@storefront-ui/vue")['SfIconArrowForward']
-    'SfIconArrowUpward': typeof import("@storefront-ui/vue")['SfIconArrowUpward']
-    'SfIconBase': typeof import("@storefront-ui/vue")['SfIconBase']
-    'SfIconBlock': typeof import("@storefront-ui/vue")['SfIconBlock']
-    'SfIconCalendarToday': typeof import("@storefront-ui/vue")['SfIconCalendarToday']
-    'SfIconCall': typeof import("@storefront-ui/vue")['SfIconCall']
-    'SfIconCancel': typeof import("@storefront-ui/vue")['SfIconCancel']
-    'SfIconCheck': typeof import("@storefront-ui/vue")['SfIconCheck']
-    'SfIconCheckBox': typeof import("@storefront-ui/vue")['SfIconCheckBox']
-    'SfIconCheckBoxOutlineBlank': typeof import("@storefront-ui/vue")['SfIconCheckBoxOutlineBlank']
-    'SfIconCheckCircle': typeof import("@storefront-ui/vue")['SfIconCheckCircle']
-    'SfIconChevronLeft': typeof import("@storefront-ui/vue")['SfIconChevronLeft']
-    'SfIconChevronRight': typeof import("@storefront-ui/vue")['SfIconChevronRight']
-    'SfIconCircle': typeof import("@storefront-ui/vue")['SfIconCircle']
-    'SfIconClose': typeof import("@storefront-ui/vue")['SfIconClose']
-    'SfIconCloseSm': typeof import("@storefront-ui/vue")['SfIconCloseSm']
-    'SfIconCompareArrows': typeof import("@storefront-ui/vue")['SfIconCompareArrows']
-    'SfIconContactSupport': typeof import("@storefront-ui/vue")['SfIconContactSupport']
-    'SfIconCreditCard': typeof import("@storefront-ui/vue")['SfIconCreditCard']
-    'SfIconDelete': typeof import("@storefront-ui/vue")['SfIconDelete']
-    'SfIconDownload': typeof import("@storefront-ui/vue")['SfIconDownload']
-    'SfIconEmail': typeof import("@storefront-ui/vue")['SfIconEmail']
-    'SfIconError': typeof import("@storefront-ui/vue")['SfIconError']
-    'SfIconExpandLess': typeof import("@storefront-ui/vue")['SfIconExpandLess']
-    'SfIconExpandMore': typeof import("@storefront-ui/vue")['SfIconExpandMore']
-    'SfIconFacebook': typeof import("@storefront-ui/vue")['SfIconFacebook']
-    'SfIconFavorite': typeof import("@storefront-ui/vue")['SfIconFavorite']
-    'SfIconFavoriteFilled': typeof import("@storefront-ui/vue")['SfIconFavoriteFilled']
-    'SfIconGridView': typeof import("@storefront-ui/vue")['SfIconGridView']
-    'SfIconHelp': typeof import("@storefront-ui/vue")['SfIconHelp']
-    'SfIconHome': typeof import("@storefront-ui/vue")['SfIconHome']
-    'SfIconIndeterminateCheckBox': typeof import("@storefront-ui/vue")['SfIconIndeterminateCheckBox']
-    'SfIconInfo': typeof import("@storefront-ui/vue")['SfIconInfo']
-    'SfIconInstagram': typeof import("@storefront-ui/vue")['SfIconInstagram']
-    'SfIconLanguage': typeof import("@storefront-ui/vue")['SfIconLanguage']
-    'SfIconLocalShipping': typeof import("@storefront-ui/vue")['SfIconLocalShipping']
-    'SfIconLocalFireDepartment': typeof import("@storefront-ui/vue")['SfIconLocal_fire_department']
-    'SfIconLocationOn': typeof import("@storefront-ui/vue")['SfIconLocationOn']
-    'SfIconLocationOnFilled': typeof import("@storefront-ui/vue")['SfIconLocationOnFilled']
-    'SfIconLock': typeof import("@storefront-ui/vue")['SfIconLock']
-    'SfIconLockOpen': typeof import("@storefront-ui/vue")['SfIconLockOpen']
-    'SfIconLogin': typeof import("@storefront-ui/vue")['SfIconLogin']
-    'SfIconLogout': typeof import("@storefront-ui/vue")['SfIconLogout']
-    'SfIconMenu': typeof import("@storefront-ui/vue")['SfIconMenu']
-    'SfIconMoreHoriz': typeof import("@storefront-ui/vue")['SfIconMoreHoriz']
-    'SfIconMoreVert': typeof import("@storefront-ui/vue")['SfIconMoreVert']
-    'SfIconOpenInNew': typeof import("@storefront-ui/vue")['SfIconOpenInNew']
-    'SfIconOpenSource': typeof import("@storefront-ui/vue")['SfIconOpenSource']
-    'SfIconPackage': typeof import("@storefront-ui/vue")['SfIconPackage']
-    'SfIconPercent': typeof import("@storefront-ui/vue")['SfIconPercent']
-    'SfIconPerson': typeof import("@storefront-ui/vue")['SfIconPerson']
-    'SfIconPinterest': typeof import("@storefront-ui/vue")['SfIconPinterest']
-    'SfIconPublishedWithChanges': typeof import("@storefront-ui/vue")['SfIconPublishedWithChanges']
-    'SfIconRadioButtonChecked': typeof import("@storefront-ui/vue")['SfIconRadioButtonChecked']
-    'SfIconRadioButtonUnchecked': typeof import("@storefront-ui/vue")['SfIconRadioButtonUnchecked']
-    'SfIconReact': typeof import("@storefront-ui/vue")['SfIconReact']
-    'SfIconRemove': typeof import("@storefront-ui/vue")['SfIconRemove']
-    'SfIconRemoveShoppingCart': typeof import("@storefront-ui/vue")['SfIconRemoveShoppingCart']
-    'SfIconSafetyCheck': typeof import("@storefront-ui/vue")['SfIconSafetyCheck']
-    'SfIconSchedule': typeof import("@storefront-ui/vue")['SfIconSchedule']
-    'SfIconSearch': typeof import("@storefront-ui/vue")['SfIconSearch']
-    'SfIconSell': typeof import("@storefront-ui/vue")['SfIconSell']
-    'SfIconShare': typeof import("@storefront-ui/vue")['SfIconShare']
-    'SfIconShoppingCart': typeof import("@storefront-ui/vue")['SfIconShoppingCart']
-    'SfIconShoppingCartCheckout': typeof import("@storefront-ui/vue")['SfIconShoppingCartCheckout']
-    'SfIconSort': typeof import("@storefront-ui/vue")['SfIconSort']
-    'SfIconStar': typeof import("@storefront-ui/vue")['SfIconStar']
-    'SfIconStarFilled': typeof import("@storefront-ui/vue")['SfIconStarFilled']
-    'SfIconStarHalf': typeof import("@storefront-ui/vue")['SfIconStarHalf']
-    'SfIconThumbDown': typeof import("@storefront-ui/vue")['SfIconThumbDown']
-    'SfIconThumbUp': typeof import("@storefront-ui/vue")['SfIconThumbUp']
-    'SfIconTune': typeof import("@storefront-ui/vue")['SfIconTune']
-    'SfIconTwitter': typeof import("@storefront-ui/vue")['SfIconTwitter']
-    'SfIconUndo': typeof import("@storefront-ui/vue")['SfIconUndo']
-    'SfIconUnfoldMore': typeof import("@storefront-ui/vue")['SfIconUnfoldMore']
-    'SfIconUpload': typeof import("@storefront-ui/vue")['SfIconUpload']
-    'SfIconViewList': typeof import("@storefront-ui/vue")['SfIconViewList']
-    'SfIconVisibility': typeof import("@storefront-ui/vue")['SfIconVisibility']
-    'SfIconVisibilityOff': typeof import("@storefront-ui/vue")['SfIconVisibilityOff']
-    'SfIconVsfDiamond': typeof import("@storefront-ui/vue")['SfIconVsfDiamond']
-    'SfIconVuejs': typeof import("@storefront-ui/vue")['SfIconVuejs']
-    'SfIconVuestorefront': typeof import("@storefront-ui/vue")['SfIconVuestorefront']
-    'SfIconWarehouse': typeof import("@storefront-ui/vue")['SfIconWarehouse']
-    'SfIconWarning': typeof import("@storefront-ui/vue")['SfIconWarning']
-    'SfIconYoutube': typeof import("@storefront-ui/vue")['SfIconYoutube']
-    'SfInput': typeof import("@storefront-ui/vue")['SfInput']
-    'SfLink': typeof import("@storefront-ui/vue")['SfLink']
-    'SfListItem': typeof import("@storefront-ui/vue")['SfListItem']
-    'SfLoaderCircular': typeof import("@storefront-ui/vue")['SfLoaderCircular']
-    'SfLoaderLinear': typeof import("@storefront-ui/vue")['SfLoaderLinear']
-    'SfModal': typeof import("@storefront-ui/vue")['SfModal']
-    'SfProgressCircular': typeof import("@storefront-ui/vue")['SfProgressCircular']
-    'SfProgressLinear': typeof import("@storefront-ui/vue")['SfProgressLinear']
-    'SfRadio': typeof import("@storefront-ui/vue")['SfRadio']
-    'SfRating': typeof import("@storefront-ui/vue")['SfRating']
-    'SfRatingButton': typeof import("@storefront-ui/vue")['SfRatingButton']
-    'SfScrollable': typeof import("@storefront-ui/vue")['SfScrollable']
-    'SfSelect': typeof import("@storefront-ui/vue")['SfSelect']
-    'SfSwitch': typeof import("@storefront-ui/vue")['SfSwitch']
-    'SfTextarea': typeof import("@storefront-ui/vue")['SfTextarea']
-    'SfThumbnail': typeof import("@storefront-ui/vue")['SfThumbnail']
-    'SfTooltip': typeof import("@storefront-ui/vue")['SfTooltip']
-    'NuxtLinkLocale': typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']
-    'SwitchLocalePathLink': typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']
-    'NuxtPage': typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
-    'NoScript': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
-    'Link': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
-    'Base': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Base']
-    'Title': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Title']
-    'Meta': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Meta']
-    'Style': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Style']
-    'Head': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Head']
-    'Html': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
-    'Body': typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
-    'NuxtIsland': typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-    'NuxtRouteAnnouncer': IslandComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-      'LazyFooterNav': LazyComponent<typeof import("../components/FooterNav.vue")['default']>
-    'LazyRelatedRelatedposts': LazyComponent<typeof import("../components/Related/relatedposts.vue")['default']>
-    'LazyRelatedRelatedproducts': LazyComponent<typeof import("../components/Related/relatedproducts.vue")['default']>
-    'LazySearch': LazyComponent<typeof import("../components/Search/search.vue")['default']>
-    'LazyEcosystemmenu': LazyComponent<typeof import("../components/ecosystemmenu.vue")['default']>
-    'LazyNuxtWelcome': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
-    'LazyNuxtLayout': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
-    'LazyNuxtErrorBoundary': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
-    'LazyClientOnly': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/client-only")['default']>
-    'LazyDevOnly': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/dev-only")['default']>
-    'LazyServerPlaceholder': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-    'LazyNuxtLink': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-link")['default']>
-    'LazyNuxtLoadingIndicator': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']>
-    'LazyNuxtTime': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']>
-    'LazyNuxtRouteAnnouncer': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
-    'LazyNuxtImg': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
-    'LazyNuxtPicture': LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
-    'LazySfAccordionItem': LazyComponent<typeof import("@storefront-ui/vue")['SfAccordionItem']>
-    'LazySfBadge': LazyComponent<typeof import("@storefront-ui/vue")['SfBadge']>
-    'LazySfButton': LazyComponent<typeof import("@storefront-ui/vue")['SfButton']>
-    'LazySfCheckbox': LazyComponent<typeof import("@storefront-ui/vue")['SfCheckbox']>
-    'LazySfChip': LazyComponent<typeof import("@storefront-ui/vue")['SfChip']>
-    'LazySfCounter': LazyComponent<typeof import("@storefront-ui/vue")['SfCounter']>
-    'LazySfDrawer': LazyComponent<typeof import("@storefront-ui/vue")['SfDrawer']>
-    'LazySfDropdown': LazyComponent<typeof import("@storefront-ui/vue")['SfDropdown']>
-    'LazySfIconAdd': LazyComponent<typeof import("@storefront-ui/vue")['SfIconAdd']>
-    'LazySfIconAddShoppingCart': LazyComponent<typeof import("@storefront-ui/vue")['SfIconAddShoppingCart']>
-    'LazySfIconAlokai': LazyComponent<typeof import("@storefront-ui/vue")['SfIconAlokai']>
-    'LazySfIconAlokaiFull': LazyComponent<typeof import("@storefront-ui/vue")['SfIconAlokaiFull']>
-    'LazySfIconArrowBack': LazyComponent<typeof import("@storefront-ui/vue")['SfIconArrowBack']>
-    'LazySfIconArrowDownward': LazyComponent<typeof import("@storefront-ui/vue")['SfIconArrowDownward']>
-    'LazySfIconArrowForward': LazyComponent<typeof import("@storefront-ui/vue")['SfIconArrowForward']>
-    'LazySfIconArrowUpward': LazyComponent<typeof import("@storefront-ui/vue")['SfIconArrowUpward']>
-    'LazySfIconBase': LazyComponent<typeof import("@storefront-ui/vue")['SfIconBase']>
-    'LazySfIconBlock': LazyComponent<typeof import("@storefront-ui/vue")['SfIconBlock']>
-    'LazySfIconCalendarToday': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCalendarToday']>
-    'LazySfIconCall': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCall']>
-    'LazySfIconCancel': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCancel']>
-    'LazySfIconCheck': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCheck']>
-    'LazySfIconCheckBox': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCheckBox']>
-    'LazySfIconCheckBoxOutlineBlank': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCheckBoxOutlineBlank']>
-    'LazySfIconCheckCircle': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCheckCircle']>
-    'LazySfIconChevronLeft': LazyComponent<typeof import("@storefront-ui/vue")['SfIconChevronLeft']>
-    'LazySfIconChevronRight': LazyComponent<typeof import("@storefront-ui/vue")['SfIconChevronRight']>
-    'LazySfIconCircle': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCircle']>
-    'LazySfIconClose': LazyComponent<typeof import("@storefront-ui/vue")['SfIconClose']>
-    'LazySfIconCloseSm': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCloseSm']>
-    'LazySfIconCompareArrows': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCompareArrows']>
-    'LazySfIconContactSupport': LazyComponent<typeof import("@storefront-ui/vue")['SfIconContactSupport']>
-    'LazySfIconCreditCard': LazyComponent<typeof import("@storefront-ui/vue")['SfIconCreditCard']>
-    'LazySfIconDelete': LazyComponent<typeof import("@storefront-ui/vue")['SfIconDelete']>
-    'LazySfIconDownload': LazyComponent<typeof import("@storefront-ui/vue")['SfIconDownload']>
-    'LazySfIconEmail': LazyComponent<typeof import("@storefront-ui/vue")['SfIconEmail']>
-    'LazySfIconError': LazyComponent<typeof import("@storefront-ui/vue")['SfIconError']>
-    'LazySfIconExpandLess': LazyComponent<typeof import("@storefront-ui/vue")['SfIconExpandLess']>
-    'LazySfIconExpandMore': LazyComponent<typeof import("@storefront-ui/vue")['SfIconExpandMore']>
-    'LazySfIconFacebook': LazyComponent<typeof import("@storefront-ui/vue")['SfIconFacebook']>
-    'LazySfIconFavorite': LazyComponent<typeof import("@storefront-ui/vue")['SfIconFavorite']>
-    'LazySfIconFavoriteFilled': LazyComponent<typeof import("@storefront-ui/vue")['SfIconFavoriteFilled']>
-    'LazySfIconGridView': LazyComponent<typeof import("@storefront-ui/vue")['SfIconGridView']>
-    'LazySfIconHelp': LazyComponent<typeof import("@storefront-ui/vue")['SfIconHelp']>
-    'LazySfIconHome': LazyComponent<typeof import("@storefront-ui/vue")['SfIconHome']>
-    'LazySfIconIndeterminateCheckBox': LazyComponent<typeof import("@storefront-ui/vue")['SfIconIndeterminateCheckBox']>
-    'LazySfIconInfo': LazyComponent<typeof import("@storefront-ui/vue")['SfIconInfo']>
-    'LazySfIconInstagram': LazyComponent<typeof import("@storefront-ui/vue")['SfIconInstagram']>
-    'LazySfIconLanguage': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLanguage']>
-    'LazySfIconLocalShipping': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLocalShipping']>
-    'LazySfIconLocalFireDepartment': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLocal_fire_department']>
-    'LazySfIconLocationOn': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLocationOn']>
-    'LazySfIconLocationOnFilled': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLocationOnFilled']>
-    'LazySfIconLock': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLock']>
-    'LazySfIconLockOpen': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLockOpen']>
-    'LazySfIconLogin': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLogin']>
-    'LazySfIconLogout': LazyComponent<typeof import("@storefront-ui/vue")['SfIconLogout']>
-    'LazySfIconMenu': LazyComponent<typeof import("@storefront-ui/vue")['SfIconMenu']>
-    'LazySfIconMoreHoriz': LazyComponent<typeof import("@storefront-ui/vue")['SfIconMoreHoriz']>
-    'LazySfIconMoreVert': LazyComponent<typeof import("@storefront-ui/vue")['SfIconMoreVert']>
-    'LazySfIconOpenInNew': LazyComponent<typeof import("@storefront-ui/vue")['SfIconOpenInNew']>
-    'LazySfIconOpenSource': LazyComponent<typeof import("@storefront-ui/vue")['SfIconOpenSource']>
-    'LazySfIconPackage': LazyComponent<typeof import("@storefront-ui/vue")['SfIconPackage']>
-    'LazySfIconPercent': LazyComponent<typeof import("@storefront-ui/vue")['SfIconPercent']>
-    'LazySfIconPerson': LazyComponent<typeof import("@storefront-ui/vue")['SfIconPerson']>
-    'LazySfIconPinterest': LazyComponent<typeof import("@storefront-ui/vue")['SfIconPinterest']>
-    'LazySfIconPublishedWithChanges': LazyComponent<typeof import("@storefront-ui/vue")['SfIconPublishedWithChanges']>
-    'LazySfIconRadioButtonChecked': LazyComponent<typeof import("@storefront-ui/vue")['SfIconRadioButtonChecked']>
-    'LazySfIconRadioButtonUnchecked': LazyComponent<typeof import("@storefront-ui/vue")['SfIconRadioButtonUnchecked']>
-    'LazySfIconReact': LazyComponent<typeof import("@storefront-ui/vue")['SfIconReact']>
-    'LazySfIconRemove': LazyComponent<typeof import("@storefront-ui/vue")['SfIconRemove']>
-    'LazySfIconRemoveShoppingCart': LazyComponent<typeof import("@storefront-ui/vue")['SfIconRemoveShoppingCart']>
-    'LazySfIconSafetyCheck': LazyComponent<typeof import("@storefront-ui/vue")['SfIconSafetyCheck']>
-    'LazySfIconSchedule': LazyComponent<typeof import("@storefront-ui/vue")['SfIconSchedule']>
-    'LazySfIconSearch': LazyComponent<typeof import("@storefront-ui/vue")['SfIconSearch']>
-    'LazySfIconSell': LazyComponent<typeof import("@storefront-ui/vue")['SfIconSell']>
-    'LazySfIconShare': LazyComponent<typeof import("@storefront-ui/vue")['SfIconShare']>
-    'LazySfIconShoppingCart': LazyComponent<typeof import("@storefront-ui/vue")['SfIconShoppingCart']>
-    'LazySfIconShoppingCartCheckout': LazyComponent<typeof import("@storefront-ui/vue")['SfIconShoppingCartCheckout']>
-    'LazySfIconSort': LazyComponent<typeof import("@storefront-ui/vue")['SfIconSort']>
-    'LazySfIconStar': LazyComponent<typeof import("@storefront-ui/vue")['SfIconStar']>
-    'LazySfIconStarFilled': LazyComponent<typeof import("@storefront-ui/vue")['SfIconStarFilled']>
-    'LazySfIconStarHalf': LazyComponent<typeof import("@storefront-ui/vue")['SfIconStarHalf']>
-    'LazySfIconThumbDown': LazyComponent<typeof import("@storefront-ui/vue")['SfIconThumbDown']>
-    'LazySfIconThumbUp': LazyComponent<typeof import("@storefront-ui/vue")['SfIconThumbUp']>
-    'LazySfIconTune': LazyComponent<typeof import("@storefront-ui/vue")['SfIconTune']>
-    'LazySfIconTwitter': LazyComponent<typeof import("@storefront-ui/vue")['SfIconTwitter']>
-    'LazySfIconUndo': LazyComponent<typeof import("@storefront-ui/vue")['SfIconUndo']>
-    'LazySfIconUnfoldMore': LazyComponent<typeof import("@storefront-ui/vue")['SfIconUnfoldMore']>
-    'LazySfIconUpload': LazyComponent<typeof import("@storefront-ui/vue")['SfIconUpload']>
-    'LazySfIconViewList': LazyComponent<typeof import("@storefront-ui/vue")['SfIconViewList']>
-    'LazySfIconVisibility': LazyComponent<typeof import("@storefront-ui/vue")['SfIconVisibility']>
-    'LazySfIconVisibilityOff': LazyComponent<typeof import("@storefront-ui/vue")['SfIconVisibilityOff']>
-    'LazySfIconVsfDiamond': LazyComponent<typeof import("@storefront-ui/vue")['SfIconVsfDiamond']>
-    'LazySfIconVuejs': LazyComponent<typeof import("@storefront-ui/vue")['SfIconVuejs']>
-    'LazySfIconVuestorefront': LazyComponent<typeof import("@storefront-ui/vue")['SfIconVuestorefront']>
-    'LazySfIconWarehouse': LazyComponent<typeof import("@storefront-ui/vue")['SfIconWarehouse']>
-    'LazySfIconWarning': LazyComponent<typeof import("@storefront-ui/vue")['SfIconWarning']>
-    'LazySfIconYoutube': LazyComponent<typeof import("@storefront-ui/vue")['SfIconYoutube']>
-    'LazySfInput': LazyComponent<typeof import("@storefront-ui/vue")['SfInput']>
-    'LazySfLink': LazyComponent<typeof import("@storefront-ui/vue")['SfLink']>
-    'LazySfListItem': LazyComponent<typeof import("@storefront-ui/vue")['SfListItem']>
-    'LazySfLoaderCircular': LazyComponent<typeof import("@storefront-ui/vue")['SfLoaderCircular']>
-    'LazySfLoaderLinear': LazyComponent<typeof import("@storefront-ui/vue")['SfLoaderLinear']>
-    'LazySfModal': LazyComponent<typeof import("@storefront-ui/vue")['SfModal']>
-    'LazySfProgressCircular': LazyComponent<typeof import("@storefront-ui/vue")['SfProgressCircular']>
-    'LazySfProgressLinear': LazyComponent<typeof import("@storefront-ui/vue")['SfProgressLinear']>
-    'LazySfRadio': LazyComponent<typeof import("@storefront-ui/vue")['SfRadio']>
-    'LazySfRating': LazyComponent<typeof import("@storefront-ui/vue")['SfRating']>
-    'LazySfRatingButton': LazyComponent<typeof import("@storefront-ui/vue")['SfRatingButton']>
-    'LazySfScrollable': LazyComponent<typeof import("@storefront-ui/vue")['SfScrollable']>
-    'LazySfSelect': LazyComponent<typeof import("@storefront-ui/vue")['SfSelect']>
-    'LazySfSwitch': LazyComponent<typeof import("@storefront-ui/vue")['SfSwitch']>
-    'LazySfTextarea': LazyComponent<typeof import("@storefront-ui/vue")['SfTextarea']>
-    'LazySfThumbnail': LazyComponent<typeof import("@storefront-ui/vue")['SfThumbnail']>
-    'LazySfTooltip': LazyComponent<typeof import("@storefront-ui/vue")['SfTooltip']>
-    'LazyNuxtLinkLocale': LazyComponent<typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']>
-    'LazySwitchLocalePathLink': LazyComponent<typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']>
-    'LazyNuxtPage': LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
-    'LazyNoScript': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
-    'LazyLink': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>
-    'LazyBase': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Base']>
-    'LazyTitle': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Title']>
-    'LazyMeta': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Meta']>
-    'LazyStyle': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Style']>
-    'LazyHead': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Head']>
-    'LazyHtml': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']>
-    'LazyBody': LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']>
-    'LazyNuxtIsland': LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']>
-    'LazyNuxtRouteAnnouncer': LazyComponent<IslandComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>>
-}
+type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
-declare module 'vue' {
-  export interface GlobalComponents extends _GlobalComponents { }
-}
 
-export const FooterNav: typeof import("../components/FooterNav.vue")['default']
-export const RelatedRelatedposts: typeof import("../components/Related/relatedposts.vue")['default']
-export const RelatedRelatedproducts: typeof import("../components/Related/relatedproducts.vue")['default']
-export const Search: typeof import("../components/Search/search.vue")['default']
-export const Ecosystemmenu: typeof import("../components/ecosystemmenu.vue")['default']
-export const NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
-export const NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
-export const NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
-export const ClientOnly: typeof import("../../node_modules/nuxt/dist/app/components/client-only")['default']
-export const DevOnly: typeof import("../../node_modules/nuxt/dist/app/components/dev-only")['default']
-export const ServerPlaceholder: typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']
-export const NuxtLink: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-link")['default']
-export const NuxtLoadingIndicator: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']
-export const NuxtTime: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']
-export const NuxtRouteAnnouncer: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
-export const NuxtImg: typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
-export const NuxtPicture: typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
+export const FooterNav: typeof import("../app/components/FooterNav.vue")['default']
+export const CatalogProductAddAttributeSet: typeof import("../app/components/catalog/product/add-attribute-set.vue")['default']
+export const CatalogProductAddAttribute: typeof import("../app/components/catalog/product/add-attribute.vue")['default']
+export const CatalogProductAddProduct: typeof import("../app/components/catalog/product/add-product.vue")['default']
+export const CatalogProductAddShowcase: typeof import("../app/components/catalog/product/add-showcase.vue")['default']
+export const CatalogProductAddStation: typeof import("../app/components/catalog/product/add-station.vue")['default']
+export const CatalogProductBestsellers: typeof import("../app/components/catalog/product/bestsellers.vue")['default']
+export const CatalogProductBrands: typeof import("../app/components/catalog/product/brands.vue")['default']
+export const CatalogProductColorOptions: typeof import("../app/components/catalog/product/colorOptions.vue")['default']
+export const CatalogProductDeals: typeof import("../app/components/catalog/product/deals.vue")['default']
+export const CatalogProductExclusives: typeof import("../app/components/catalog/product/exclusives.vue")['default']
+export const CatalogProductFeaturedproducts: typeof import("../app/components/catalog/product/featuredproducts.vue")['default']
+export const CatalogProductGiftCard: typeof import("../app/components/catalog/product/giftCard.vue")['default']
+export const CatalogProductLatestproducts: typeof import("../app/components/catalog/product/latestproducts.vue")['default']
+export const CatalogProductCard: typeof import("../app/components/catalog/product/productCard.vue")['default']
+export const CatalogProductCompare: typeof import("../app/components/catalog/product/productCompare.vue")['default']
+export const CatalogProductCompareTable: typeof import("../app/components/catalog/product/productCompareTable.vue")['default']
+export const CatalogProductDetails: typeof import("../app/components/catalog/product/productDetails.vue")['default']
+export const CatalogProductFaqs: typeof import("../app/components/catalog/product/productFaqs.vue")['default']
+export const CatalogProductGallery: typeof import("../app/components/catalog/product/productGallery.vue")['default']
+export const CatalogProductQty: typeof import("../app/components/catalog/product/productQty.vue")['default']
+export const CatalogProductReviews: typeof import("../app/components/catalog/product/productReviews.vue")['default']
+export const CatalogProductSpecs: typeof import("../app/components/catalog/product/productSpecs.vue")['default']
+export const CatalogProductRadiostation: typeof import("../app/components/catalog/product/radiostation.vue")['default']
+export const CatalogProductRecentlyviewed: typeof import("../app/components/catalog/product/recentlyviewed.vue")['default']
+export const CatalogProductRelatedproducts: typeof import("../app/components/catalog/product/relatedproducts.vue")['default']
+export const CatalogProductRelatedstations: typeof import("../app/components/catalog/product/relatedstations.vue")['default']
+export const CatalogProductShippingOptions: typeof import("../app/components/catalog/product/shippingOptions.vue")['default']
+export const CatalogProductSizeOptions: typeof import("../app/components/catalog/product/sizeOptions.vue")['default']
+export const CatalogProductUpdateAttributeSet: typeof import("../app/components/catalog/product/update-attribute-set.vue")['default']
+export const CatalogProductUpdateAttribute: typeof import("../app/components/catalog/product/update-attribute.vue")['default']
+export const CatalogProductUpdateProduct: typeof import("../app/components/catalog/product/update-product.vue")['default']
+export const CatalogProductUpdateShowcase: typeof import("../app/components/catalog/product/update-showcase.vue")['default']
+export const CatalogShopsRelatedstores: typeof import("../app/components/catalog/shops/relatedstores.vue")['default']
+export const CatalogShopsRestaurant: typeof import("../app/components/catalog/shops/restaurant.vue")['default']
+export const CatalogShopsStores: typeof import("../app/components/catalog/shops/stores.vue")['default']
+export const CatalogVendorBlocksBiggestcustomers: typeof import("../app/components/catalog/vendor/blocks/biggestcustomers.vue")['default']
+export const CatalogVendorBlocksLowestselling: typeof import("../app/components/catalog/vendor/blocks/lowestselling.vue")['default']
+export const CatalogVendorBlocksTopcategories: typeof import("../app/components/catalog/vendor/blocks/topcategories.vue")['default']
+export const CatalogVendorBlocksTopproducts: typeof import("../app/components/catalog/vendor/blocks/topproducts.vue")['default']
+export const CatalogVendorPagesAttributes: typeof import("../app/components/catalog/vendor/pages/attributes.vue")['default']
+export const CatalogVendorPagesCommissions: typeof import("../app/components/catalog/vendor/pages/commissions.vue")['default']
+export const CatalogVendorPagesCrm: typeof import("../app/components/catalog/vendor/pages/crm.vue")['default']
+export const CatalogVendorPagesDashboard: typeof import("../app/components/catalog/vendor/pages/dashboard.vue")['default']
+export const CatalogVendorPagesEmails: typeof import("../app/components/catalog/vendor/pages/emails.vue")['default']
+export const CatalogVendorPagesEnquiries: typeof import("../app/components/catalog/vendor/pages/enquiries.vue")['default']
+export const CatalogVendorPagesInvoices: typeof import("../app/components/catalog/vendor/pages/invoices.vue")['default']
+export const CatalogVendorPagesOrders: typeof import("../app/components/catalog/vendor/pages/orders.vue")['default']
+export const CatalogVendorPagesProducts: typeof import("../app/components/catalog/vendor/pages/products.vue")['default']
+export const CatalogVendorPagesReviews: typeof import("../app/components/catalog/vendor/pages/reviews.vue")['default']
+export const CatalogVendorPagesShipments: typeof import("../app/components/catalog/vendor/pages/shipments.vue")['default']
+export const CatalogVendorPagesStores: typeof import("../app/components/catalog/vendor/pages/stores.vue")['default']
+export const ContentBlocksBreadcrumbs: typeof import("../app/components/content/blocks/breadcrumbs.vue")['default']
+export const ContentBlocksCurrencySwitcher: typeof import("../app/components/content/blocks/currencySwitcher.vue")['default']
+export const ContentBlocksLanguageSwitcher: typeof import("../app/components/content/blocks/languageSwitcher.vue")['default']
+export const ContentBlocksVideoproduct: typeof import("../app/components/content/blocks/videoproduct.vue")['default']
+export const Ecosystemmenu: typeof import("../app/components/ecosystemmenu.vue")['default']
+export const MarketingAddCoupon: typeof import("../app/components/marketing/add-coupon.vue")['default']
+export const MarketingAddRewards: typeof import("../app/components/marketing/add-rewards.vue")['default']
+export const MarketingCoupons: typeof import("../app/components/marketing/coupons.vue")['default']
+export const MarketingPromotionsCoupons: typeof import("../app/components/marketing/promotions/coupons.vue")['default']
+export const MarketingPromotionsGiftcard[id]: typeof import("../app/components/marketing/promotions/giftcard/[id].vue")['default']
+export const MarketingPromotionsGiftcardReload: typeof import("../app/components/marketing/promotions/giftcard/reload.vue")['default']
+export const MarketingPromotionsGiftcards: typeof import("../app/components/marketing/promotions/giftcards.vue")['default']
+export const MarketingPromotionsSubscription[id]: typeof import("../app/components/marketing/promotions/subscription/[id].vue")['default']
+export const MarketingPromotionsSubscriptions: typeof import("../app/components/marketing/promotions/subscriptions.vue")['default']
+export const MarketingUpdateRewards: typeof import("../app/components/marketing/update-rewards.vue")['default']
+export const MenusLowernav: typeof import("../app/components/menus/lowernav.vue")['default']
+export const PartialsLocaleSelector: typeof import("../app/components/partials/LocaleSelector.vue")['default']
+export const PartialsStripePayment: typeof import("../app/components/partials/StripePayment.vue")['default']
+export const PartialsAddToCartBtn: typeof import("../app/components/partials/addToCartBtn.vue")['default']
+export const PartialsCartItem: typeof import("../app/components/partials/cartItem.vue")['default']
+export const PartialsCheckoutButton: typeof import("../app/components/partials/checkoutButton.vue")['default']
+export const PartialsCompareBtn: typeof import("../app/components/partials/compareBtn.vue")['default']
+export const PartialsRatings: typeof import("../app/components/partials/ratings.vue")['default']
+export const PartialsStoreCurrencySelector: typeof import("../app/components/partials/store/CurrencySelector.vue")['default']
+export const PartialsStoreSwitcher: typeof import("../app/components/partials/store/StoreSwitcher.vue")['default']
+export const RelatedRelatedposts: typeof import("../app/components/related/relatedposts.vue")['default']
+export const RelatedRelatedproducts: typeof import("../app/components/related/relatedproducts.vue")['default']
+export const SalesOrderDetailsDialog: typeof import("../app/components/sales/OrderDetailsDialog.vue")['default']
+export const SalesOrderManagement: typeof import("../app/components/sales/OrderManagement.vue")['default']
+export const SalesReceiptsTab: typeof import("../app/components/sales/ReceiptsTab.vue")['default']
+export const SalesReturnRequestDialog: typeof import("../app/components/sales/ReturnRequestDialog.vue")['default']
+export const SalesReturnsTab: typeof import("../app/components/sales/ReturnsTab.vue")['default']
+export const SalesTransactionsTab: typeof import("../app/components/sales/TransactionsTab.vue")['default']
+export const SalesBrandsRelatedbrands: typeof import("../app/components/sales/brands/relatedbrands.vue")['default']
+export const SalesCreditMemos: typeof import("../app/components/sales/creditMemos.vue")['default']
+export const SalesInvoices: typeof import("../app/components/sales/invoices.vue")['default']
+export const SalesOrdersAgreements: typeof import("../app/components/sales/orders/agreements.vue")['default']
+export const SalesOrdersCreditmemo[id]: typeof import("../app/components/sales/orders/creditmemo/[id].vue")['default']
+export const SalesOrdersCreditmemos: typeof import("../app/components/sales/orders/creditmemos.vue")['default']
+export const SalesOrdersInvoice[id]: typeof import("../app/components/sales/orders/invoice/[id].vue")['default']
+export const SalesOrdersInvoices: typeof import("../app/components/sales/orders/invoices.vue")['default']
+export const SalesOrdersMyOrder[id]: typeof import("../app/components/sales/orders/my-order/[id].vue")['default']
+export const SalesOrdersMyOrders: typeof import("../app/components/sales/orders/my-orders.vue")['default']
+export const SalesOrdersPayments: typeof import("../app/components/sales/orders/payments.vue")['default']
+export const SalesOrdersReturn: typeof import("../app/components/sales/orders/return.vue")['default']
+export const SalesOrdersReturns: typeof import("../app/components/sales/orders/returns.vue")['default']
+export const SalesOrdersShipment[id]: typeof import("../app/components/sales/orders/shipment/[id].vue")['default']
+export const SalesOrdersShipments: typeof import("../app/components/sales/orders/shipments.vue")['default']
+export const SalesOrdersTransaction[id]: typeof import("../app/components/sales/orders/transaction/[id].vue")['default']
+export const SalesOrdersTransactions: typeof import("../app/components/sales/orders/transactions.vue")['default']
+export const SalesOrdersTab: typeof import("../app/components/sales/ordersTab.vue")['default']
+export const SalesPaymentsPriceDisplay: typeof import("../app/components/sales/payments/PriceDisplay.vue")['default']
+export const SalesPaymentsStripePaymentElement: typeof import("../app/components/sales/payments/StripePaymentElement.vue")['default']
+export const Search: typeof import("../app/components/search/search.vue")['default']
+export const ShopCartItem: typeof import("../app/components/shop/cart/cartItem.vue")['default']
+export const ShopCartCheckout: typeof import("../app/components/shop/cart/checkout.vue")['default']
+export const ShopCheckoutStripeCardElement: typeof import("../app/components/shop/checkout/StripeCardElement.vue")['default']
+export const ShopCheckoutStripeCheckout: typeof import("../app/components/shop/checkout/StripeCheckout.vue")['default']
+export const ShopCheckoutAddressBilling: typeof import("../app/components/shop/checkout/addressBilling.vue")['default']
+export const ShopCheckoutAddressShipping: typeof import("../app/components/shop/checkout/addressShipping.vue")['default']
+export const ShopCheckoutCartProductItem: typeof import("../app/components/shop/checkout/cart/ProductItem.vue")['default']
+export const ShopCheckoutCartPromotionItem: typeof import("../app/components/shop/checkout/cart/PromotionItem.vue")['default']
+export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
+export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
+export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
+export const ClientOnly: typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']
+export const DevOnly: typeof import("../node_modules/nuxt/dist/app/components/dev-only")['default']
+export const ServerPlaceholder: typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
+export const NuxtLink: typeof import("../node_modules/nuxt/dist/app/components/nuxt-link")['default']
+export const NuxtLoadingIndicator: typeof import("../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']
+export const NuxtTime: typeof import("../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']
+export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
+export const NuxtImg: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']
+export const NuxtPicture: typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']
 export const SfAccordionItem: typeof import("@storefront-ui/vue")['SfAccordionItem']
 export const SfBadge: typeof import("@storefront-ui/vue")['SfBadge']
 export const SfButton: typeof import("@storefront-ui/vue")['SfButton']
@@ -445,37 +256,145 @@ export const SfSwitch: typeof import("@storefront-ui/vue")['SfSwitch']
 export const SfTextarea: typeof import("@storefront-ui/vue")['SfTextarea']
 export const SfThumbnail: typeof import("@storefront-ui/vue")['SfThumbnail']
 export const SfTooltip: typeof import("@storefront-ui/vue")['SfTooltip']
-export const NuxtLinkLocale: typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']
-export const SwitchLocalePathLink: typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']
-export const NuxtPage: typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
-export const NoScript: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
-export const Link: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
-export const Base: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Base']
-export const Title: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Title']
-export const Meta: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Meta']
-export const Style: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Style']
-export const Head: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Head']
-export const Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
-export const Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
-export const NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-export const NuxtRouteAnnouncer: IslandComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-export const LazyFooterNav: LazyComponent<typeof import("../components/FooterNav.vue")['default']>
-export const LazyRelatedRelatedposts: LazyComponent<typeof import("../components/Related/relatedposts.vue")['default']>
-export const LazyRelatedRelatedproducts: LazyComponent<typeof import("../components/Related/relatedproducts.vue")['default']>
-export const LazySearch: LazyComponent<typeof import("../components/Search/search.vue")['default']>
-export const LazyEcosystemmenu: LazyComponent<typeof import("../components/ecosystemmenu.vue")['default']>
-export const LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
-export const LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
-export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
-export const LazyClientOnly: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/client-only")['default']>
-export const LazyDevOnly: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/dev-only")['default']>
-export const LazyServerPlaceholder: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
-export const LazyNuxtLink: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-link")['default']>
-export const LazyNuxtLoadingIndicator: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']>
-export const LazyNuxtTime: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']>
-export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
-export const LazyNuxtImg: LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
-export const LazyNuxtPicture: LazyComponent<typeof import("../../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
+export const NuxtLinkLocale: typeof import("../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']
+export const SwitchLocalePathLink: typeof import("../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']
+export const NuxtPage: typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']
+export const NoScript: typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']
+export const Link: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']
+export const Base: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Base']
+export const Title: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Title']
+export const Meta: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Meta']
+export const Style: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Style']
+export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Head']
+export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
+export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
+export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
+export const LazyFooterNav: LazyComponent<typeof import("../app/components/FooterNav.vue")['default']>
+export const LazyCatalogProductAddAttributeSet: LazyComponent<typeof import("../app/components/catalog/product/add-attribute-set.vue")['default']>
+export const LazyCatalogProductAddAttribute: LazyComponent<typeof import("../app/components/catalog/product/add-attribute.vue")['default']>
+export const LazyCatalogProductAddProduct: LazyComponent<typeof import("../app/components/catalog/product/add-product.vue")['default']>
+export const LazyCatalogProductAddShowcase: LazyComponent<typeof import("../app/components/catalog/product/add-showcase.vue")['default']>
+export const LazyCatalogProductAddStation: LazyComponent<typeof import("../app/components/catalog/product/add-station.vue")['default']>
+export const LazyCatalogProductBestsellers: LazyComponent<typeof import("../app/components/catalog/product/bestsellers.vue")['default']>
+export const LazyCatalogProductBrands: LazyComponent<typeof import("../app/components/catalog/product/brands.vue")['default']>
+export const LazyCatalogProductColorOptions: LazyComponent<typeof import("../app/components/catalog/product/colorOptions.vue")['default']>
+export const LazyCatalogProductDeals: LazyComponent<typeof import("../app/components/catalog/product/deals.vue")['default']>
+export const LazyCatalogProductExclusives: LazyComponent<typeof import("../app/components/catalog/product/exclusives.vue")['default']>
+export const LazyCatalogProductFeaturedproducts: LazyComponent<typeof import("../app/components/catalog/product/featuredproducts.vue")['default']>
+export const LazyCatalogProductGiftCard: LazyComponent<typeof import("../app/components/catalog/product/giftCard.vue")['default']>
+export const LazyCatalogProductLatestproducts: LazyComponent<typeof import("../app/components/catalog/product/latestproducts.vue")['default']>
+export const LazyCatalogProductCard: LazyComponent<typeof import("../app/components/catalog/product/productCard.vue")['default']>
+export const LazyCatalogProductCompare: LazyComponent<typeof import("../app/components/catalog/product/productCompare.vue")['default']>
+export const LazyCatalogProductCompareTable: LazyComponent<typeof import("../app/components/catalog/product/productCompareTable.vue")['default']>
+export const LazyCatalogProductDetails: LazyComponent<typeof import("../app/components/catalog/product/productDetails.vue")['default']>
+export const LazyCatalogProductFaqs: LazyComponent<typeof import("../app/components/catalog/product/productFaqs.vue")['default']>
+export const LazyCatalogProductGallery: LazyComponent<typeof import("../app/components/catalog/product/productGallery.vue")['default']>
+export const LazyCatalogProductQty: LazyComponent<typeof import("../app/components/catalog/product/productQty.vue")['default']>
+export const LazyCatalogProductReviews: LazyComponent<typeof import("../app/components/catalog/product/productReviews.vue")['default']>
+export const LazyCatalogProductSpecs: LazyComponent<typeof import("../app/components/catalog/product/productSpecs.vue")['default']>
+export const LazyCatalogProductRadiostation: LazyComponent<typeof import("../app/components/catalog/product/radiostation.vue")['default']>
+export const LazyCatalogProductRecentlyviewed: LazyComponent<typeof import("../app/components/catalog/product/recentlyviewed.vue")['default']>
+export const LazyCatalogProductRelatedproducts: LazyComponent<typeof import("../app/components/catalog/product/relatedproducts.vue")['default']>
+export const LazyCatalogProductRelatedstations: LazyComponent<typeof import("../app/components/catalog/product/relatedstations.vue")['default']>
+export const LazyCatalogProductShippingOptions: LazyComponent<typeof import("../app/components/catalog/product/shippingOptions.vue")['default']>
+export const LazyCatalogProductSizeOptions: LazyComponent<typeof import("../app/components/catalog/product/sizeOptions.vue")['default']>
+export const LazyCatalogProductUpdateAttributeSet: LazyComponent<typeof import("../app/components/catalog/product/update-attribute-set.vue")['default']>
+export const LazyCatalogProductUpdateAttribute: LazyComponent<typeof import("../app/components/catalog/product/update-attribute.vue")['default']>
+export const LazyCatalogProductUpdateProduct: LazyComponent<typeof import("../app/components/catalog/product/update-product.vue")['default']>
+export const LazyCatalogProductUpdateShowcase: LazyComponent<typeof import("../app/components/catalog/product/update-showcase.vue")['default']>
+export const LazyCatalogShopsRelatedstores: LazyComponent<typeof import("../app/components/catalog/shops/relatedstores.vue")['default']>
+export const LazyCatalogShopsRestaurant: LazyComponent<typeof import("../app/components/catalog/shops/restaurant.vue")['default']>
+export const LazyCatalogShopsStores: LazyComponent<typeof import("../app/components/catalog/shops/stores.vue")['default']>
+export const LazyCatalogVendorBlocksBiggestcustomers: LazyComponent<typeof import("../app/components/catalog/vendor/blocks/biggestcustomers.vue")['default']>
+export const LazyCatalogVendorBlocksLowestselling: LazyComponent<typeof import("../app/components/catalog/vendor/blocks/lowestselling.vue")['default']>
+export const LazyCatalogVendorBlocksTopcategories: LazyComponent<typeof import("../app/components/catalog/vendor/blocks/topcategories.vue")['default']>
+export const LazyCatalogVendorBlocksTopproducts: LazyComponent<typeof import("../app/components/catalog/vendor/blocks/topproducts.vue")['default']>
+export const LazyCatalogVendorPagesAttributes: LazyComponent<typeof import("../app/components/catalog/vendor/pages/attributes.vue")['default']>
+export const LazyCatalogVendorPagesCommissions: LazyComponent<typeof import("../app/components/catalog/vendor/pages/commissions.vue")['default']>
+export const LazyCatalogVendorPagesCrm: LazyComponent<typeof import("../app/components/catalog/vendor/pages/crm.vue")['default']>
+export const LazyCatalogVendorPagesDashboard: LazyComponent<typeof import("../app/components/catalog/vendor/pages/dashboard.vue")['default']>
+export const LazyCatalogVendorPagesEmails: LazyComponent<typeof import("../app/components/catalog/vendor/pages/emails.vue")['default']>
+export const LazyCatalogVendorPagesEnquiries: LazyComponent<typeof import("../app/components/catalog/vendor/pages/enquiries.vue")['default']>
+export const LazyCatalogVendorPagesInvoices: LazyComponent<typeof import("../app/components/catalog/vendor/pages/invoices.vue")['default']>
+export const LazyCatalogVendorPagesOrders: LazyComponent<typeof import("../app/components/catalog/vendor/pages/orders.vue")['default']>
+export const LazyCatalogVendorPagesProducts: LazyComponent<typeof import("../app/components/catalog/vendor/pages/products.vue")['default']>
+export const LazyCatalogVendorPagesReviews: LazyComponent<typeof import("../app/components/catalog/vendor/pages/reviews.vue")['default']>
+export const LazyCatalogVendorPagesShipments: LazyComponent<typeof import("../app/components/catalog/vendor/pages/shipments.vue")['default']>
+export const LazyCatalogVendorPagesStores: LazyComponent<typeof import("../app/components/catalog/vendor/pages/stores.vue")['default']>
+export const LazyContentBlocksBreadcrumbs: LazyComponent<typeof import("../app/components/content/blocks/breadcrumbs.vue")['default']>
+export const LazyContentBlocksCurrencySwitcher: LazyComponent<typeof import("../app/components/content/blocks/currencySwitcher.vue")['default']>
+export const LazyContentBlocksLanguageSwitcher: LazyComponent<typeof import("../app/components/content/blocks/languageSwitcher.vue")['default']>
+export const LazyContentBlocksVideoproduct: LazyComponent<typeof import("../app/components/content/blocks/videoproduct.vue")['default']>
+export const LazyEcosystemmenu: LazyComponent<typeof import("../app/components/ecosystemmenu.vue")['default']>
+export const LazyMarketingAddCoupon: LazyComponent<typeof import("../app/components/marketing/add-coupon.vue")['default']>
+export const LazyMarketingAddRewards: LazyComponent<typeof import("../app/components/marketing/add-rewards.vue")['default']>
+export const LazyMarketingCoupons: LazyComponent<typeof import("../app/components/marketing/coupons.vue")['default']>
+export const LazyMarketingPromotionsCoupons: LazyComponent<typeof import("../app/components/marketing/promotions/coupons.vue")['default']>
+export const LazyMarketingPromotionsGiftcard[id]: LazyComponent<typeof import("../app/components/marketing/promotions/giftcard/[id].vue")['default']>
+export const LazyMarketingPromotionsGiftcardReload: LazyComponent<typeof import("../app/components/marketing/promotions/giftcard/reload.vue")['default']>
+export const LazyMarketingPromotionsGiftcards: LazyComponent<typeof import("../app/components/marketing/promotions/giftcards.vue")['default']>
+export const LazyMarketingPromotionsSubscription[id]: LazyComponent<typeof import("../app/components/marketing/promotions/subscription/[id].vue")['default']>
+export const LazyMarketingPromotionsSubscriptions: LazyComponent<typeof import("../app/components/marketing/promotions/subscriptions.vue")['default']>
+export const LazyMarketingUpdateRewards: LazyComponent<typeof import("../app/components/marketing/update-rewards.vue")['default']>
+export const LazyMenusLowernav: LazyComponent<typeof import("../app/components/menus/lowernav.vue")['default']>
+export const LazyPartialsLocaleSelector: LazyComponent<typeof import("../app/components/partials/LocaleSelector.vue")['default']>
+export const LazyPartialsStripePayment: LazyComponent<typeof import("../app/components/partials/StripePayment.vue")['default']>
+export const LazyPartialsAddToCartBtn: LazyComponent<typeof import("../app/components/partials/addToCartBtn.vue")['default']>
+export const LazyPartialsCartItem: LazyComponent<typeof import("../app/components/partials/cartItem.vue")['default']>
+export const LazyPartialsCheckoutButton: LazyComponent<typeof import("../app/components/partials/checkoutButton.vue")['default']>
+export const LazyPartialsCompareBtn: LazyComponent<typeof import("../app/components/partials/compareBtn.vue")['default']>
+export const LazyPartialsRatings: LazyComponent<typeof import("../app/components/partials/ratings.vue")['default']>
+export const LazyPartialsStoreCurrencySelector: LazyComponent<typeof import("../app/components/partials/store/CurrencySelector.vue")['default']>
+export const LazyPartialsStoreSwitcher: LazyComponent<typeof import("../app/components/partials/store/StoreSwitcher.vue")['default']>
+export const LazyRelatedRelatedposts: LazyComponent<typeof import("../app/components/related/relatedposts.vue")['default']>
+export const LazyRelatedRelatedproducts: LazyComponent<typeof import("../app/components/related/relatedproducts.vue")['default']>
+export const LazySalesOrderDetailsDialog: LazyComponent<typeof import("../app/components/sales/OrderDetailsDialog.vue")['default']>
+export const LazySalesOrderManagement: LazyComponent<typeof import("../app/components/sales/OrderManagement.vue")['default']>
+export const LazySalesReceiptsTab: LazyComponent<typeof import("../app/components/sales/ReceiptsTab.vue")['default']>
+export const LazySalesReturnRequestDialog: LazyComponent<typeof import("../app/components/sales/ReturnRequestDialog.vue")['default']>
+export const LazySalesReturnsTab: LazyComponent<typeof import("../app/components/sales/ReturnsTab.vue")['default']>
+export const LazySalesTransactionsTab: LazyComponent<typeof import("../app/components/sales/TransactionsTab.vue")['default']>
+export const LazySalesBrandsRelatedbrands: LazyComponent<typeof import("../app/components/sales/brands/relatedbrands.vue")['default']>
+export const LazySalesCreditMemos: LazyComponent<typeof import("../app/components/sales/creditMemos.vue")['default']>
+export const LazySalesInvoices: LazyComponent<typeof import("../app/components/sales/invoices.vue")['default']>
+export const LazySalesOrdersAgreements: LazyComponent<typeof import("../app/components/sales/orders/agreements.vue")['default']>
+export const LazySalesOrdersCreditmemo[id]: LazyComponent<typeof import("../app/components/sales/orders/creditmemo/[id].vue")['default']>
+export const LazySalesOrdersCreditmemos: LazyComponent<typeof import("../app/components/sales/orders/creditmemos.vue")['default']>
+export const LazySalesOrdersInvoice[id]: LazyComponent<typeof import("../app/components/sales/orders/invoice/[id].vue")['default']>
+export const LazySalesOrdersInvoices: LazyComponent<typeof import("../app/components/sales/orders/invoices.vue")['default']>
+export const LazySalesOrdersMyOrder[id]: LazyComponent<typeof import("../app/components/sales/orders/my-order/[id].vue")['default']>
+export const LazySalesOrdersMyOrders: LazyComponent<typeof import("../app/components/sales/orders/my-orders.vue")['default']>
+export const LazySalesOrdersPayments: LazyComponent<typeof import("../app/components/sales/orders/payments.vue")['default']>
+export const LazySalesOrdersReturn: LazyComponent<typeof import("../app/components/sales/orders/return.vue")['default']>
+export const LazySalesOrdersReturns: LazyComponent<typeof import("../app/components/sales/orders/returns.vue")['default']>
+export const LazySalesOrdersShipment[id]: LazyComponent<typeof import("../app/components/sales/orders/shipment/[id].vue")['default']>
+export const LazySalesOrdersShipments: LazyComponent<typeof import("../app/components/sales/orders/shipments.vue")['default']>
+export const LazySalesOrdersTransaction[id]: LazyComponent<typeof import("../app/components/sales/orders/transaction/[id].vue")['default']>
+export const LazySalesOrdersTransactions: LazyComponent<typeof import("../app/components/sales/orders/transactions.vue")['default']>
+export const LazySalesOrdersTab: LazyComponent<typeof import("../app/components/sales/ordersTab.vue")['default']>
+export const LazySalesPaymentsPriceDisplay: LazyComponent<typeof import("../app/components/sales/payments/PriceDisplay.vue")['default']>
+export const LazySalesPaymentsStripePaymentElement: LazyComponent<typeof import("../app/components/sales/payments/StripePaymentElement.vue")['default']>
+export const LazySearch: LazyComponent<typeof import("../app/components/search/search.vue")['default']>
+export const LazyShopCartItem: LazyComponent<typeof import("../app/components/shop/cart/cartItem.vue")['default']>
+export const LazyShopCartCheckout: LazyComponent<typeof import("../app/components/shop/cart/checkout.vue")['default']>
+export const LazyShopCheckoutStripeCardElement: LazyComponent<typeof import("../app/components/shop/checkout/StripeCardElement.vue")['default']>
+export const LazyShopCheckoutStripeCheckout: LazyComponent<typeof import("../app/components/shop/checkout/StripeCheckout.vue")['default']>
+export const LazyShopCheckoutAddressBilling: LazyComponent<typeof import("../app/components/shop/checkout/addressBilling.vue")['default']>
+export const LazyShopCheckoutAddressShipping: LazyComponent<typeof import("../app/components/shop/checkout/addressShipping.vue")['default']>
+export const LazyShopCheckoutCartProductItem: LazyComponent<typeof import("../app/components/shop/checkout/cart/ProductItem.vue")['default']>
+export const LazyShopCheckoutCartPromotionItem: LazyComponent<typeof import("../app/components/shop/checkout/cart/PromotionItem.vue")['default']>
+export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
+export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
+export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
+export const LazyClientOnly: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']>
+export const LazyDevOnly: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/dev-only")['default']>
+export const LazyServerPlaceholder: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
+export const LazyNuxtLink: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-link")['default']>
+export const LazyNuxtLoadingIndicator: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']>
+export const LazyNuxtTime: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-time.vue")['default']>
+export const LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
+export const LazyNuxtImg: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue")['default']>
+export const LazyNuxtPicture: LazyComponent<typeof import("../node_modules/@nuxt/image/dist/runtime/components/NuxtPicture.vue")['default']>
 export const LazySfAccordionItem: LazyComponent<typeof import("@storefront-ui/vue")['SfAccordionItem']>
 export const LazySfBadge: LazyComponent<typeof import("@storefront-ui/vue")['SfBadge']>
 export const LazySfButton: LazyComponent<typeof import("@storefront-ui/vue")['SfButton']>
@@ -592,19 +511,18 @@ export const LazySfSwitch: LazyComponent<typeof import("@storefront-ui/vue")['Sf
 export const LazySfTextarea: LazyComponent<typeof import("@storefront-ui/vue")['SfTextarea']>
 export const LazySfThumbnail: LazyComponent<typeof import("@storefront-ui/vue")['SfThumbnail']>
 export const LazySfTooltip: LazyComponent<typeof import("@storefront-ui/vue")['SfTooltip']>
-export const LazyNuxtLinkLocale: LazyComponent<typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']>
-export const LazySwitchLocalePathLink: LazyComponent<typeof import("../../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']>
-export const LazyNuxtPage: LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
-export const LazyNoScript: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
-export const LazyLink: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>
-export const LazyBase: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Base']>
-export const LazyTitle: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Title']>
-export const LazyMeta: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Meta']>
-export const LazyStyle: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Style']>
-export const LazyHead: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Head']>
-export const LazyHtml: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']>
-export const LazyBody: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']>
-export const LazyNuxtIsland: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']>
-export const LazyNuxtRouteAnnouncer: LazyComponent<IslandComponent<typeof import("../../node_modules/nuxt/dist/app/components/server-placeholder")['default']>>
+export const LazyNuxtLinkLocale: LazyComponent<typeof import("../node_modules/@nuxtjs/i18n/dist/runtime/components/NuxtLinkLocale")['default']>
+export const LazySwitchLocalePathLink: LazyComponent<typeof import("../node_modules/@nuxtjs/i18n/dist/runtime/components/SwitchLocalePathLink")['default']>
+export const LazyNuxtPage: LazyComponent<typeof import("../node_modules/nuxt/dist/pages/runtime/page")['default']>
+export const LazyNoScript: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
+export const LazyLink: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Link']>
+export const LazyBase: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Base']>
+export const LazyTitle: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Title']>
+export const LazyMeta: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Meta']>
+export const LazyStyle: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Style']>
+export const LazyHead: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Head']>
+export const LazyHtml: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']>
+export const LazyBody: LazyComponent<typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']>
+export const LazyNuxtIsland: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']>
 
 export const componentNames: string[]

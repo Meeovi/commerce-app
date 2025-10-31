@@ -1,21 +1,21 @@
 {
-   "name": "starter-template",
+   "name": "commerce-app",
    "version": "0.0.7",
    "description": "This is a template for my projects.",
    "author": "Sebastian Hilton (https://www.sebastianhilton.com)",
    "homepage": "https://www.sebastianhilton.com",
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/Meeovi/Meeovi-Starter-Template"
+      "url": "git+https://github.com/Meeovi/commerce-app"
    },
    "bugs": {
-      "url": "https://github.com/Meeovi/Meeovi-Starter-Template/issues"
+      "url": "https://github.com/Meeovi/commerce-app/issues"
    },
    "license": "MIT",
    "private": true,
    "scripts": {
       "starter-commit": "git add . && git commit -m \"ready for update\"",
-      "starter-update": "git pull \"https://github.com/Meeovi/Meeovi-Starter-Template\"",
+      "starter-update": "git pull \"https://github.com/Meeovi/commerce-app\"",
       "build": "nuxt build",
       "dev": "nuxt dev",
       "ts-node": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}'",
@@ -25,19 +25,44 @@
       "gqlg": "npx gqlg --schemaFilePath graphql/schema.graphql --destDirPath graphql/framework --depthLimit 2"
    },
    "devDependencies": {
-      "@rollup/plugin-graphql": "^2.0.5",
-      "nuxt": "^4.1.2",
-      "typescript": "^5.4.3"
+      "@nuxtjs/turnstile": "latest",
+      "@rollup/plugin-graphql": "latest",
+      "@types/graphql": "latest",
+      "@vueuse/core": "latest",
+      "@vueuse/nuxt": "latest",
+      "graphql": "latest",
+      "graphql-tag": "latest",
+      "nuxt": "latest",
+      "typescript": "latest"
    },
    "dependencies": {
-      "@apollo/client": "^3.10.4",
-      "@logto/nuxt": "^1.2.6",
-      "@nuxt/image": "^1.11.0",
-      "@nuxtjs/i18n": "^10.1.0",
-      "@nuxtjs/tailwindcss": "^6.14.0",
-      "@storefront-ui/nuxt": "^2.5.4",
-      "nuxt-security": "^2.4.0",
-      "pinia": "^2.3.1",
-      "vite-plugin-vuetify": "^2.1.2"
+      "@apollo/client": "latest",
+      "@directus/sdk": "latest",
+      "@directus/types": "latest",
+      "@fortawesome/fontawesome-free": "latest",
+      "@fortawesome/fontawesome-svg-core": "latest",
+      "@fortawesome/free-solid-svg-icons": "latest",
+      "@fortawesome/vue-fontawesome": "latest",
+      "@mdi/font": "latest",
+      "@meilisearch/instant-meilisearch": "^0.28.0",
+      "@nuxt/image": "latest",
+      "@nuxtjs/i18n": "latest",
+      "@nuxtjs/leaflet": "latest",
+      "@nuxtjs/tailwindcss": "latest",
+      "@pinia/nuxt": "latest",
+      "@storefront-ui/nuxt": "latest",
+      "@stripe/stripe-js": "^8.2.0",
+      "@types/leaflet": "latest",
+      "@types/lodash-es": "latest",
+      "@vue/apollo-composable": "^4.2.2",
+      "eslint": "latest",
+      "instantsearch.css": "^8.6.0",
+      "meilisearch": "^0.54.0",
+      "nuxt-security": "latest",
+      "pinia": "latest",
+      "video.js": "latest",
+      "vite-plugin-vuetify": "latest",
+      "vue-instantsearch": "^4.22.0",
+      "vuetify-nuxt-module": "latest"
    }
 }

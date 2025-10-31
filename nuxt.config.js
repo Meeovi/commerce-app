@@ -68,15 +68,9 @@ export default defineNuxtConfig({
     "@storefront-ui/nuxt",
     '@nuxtjs/i18n',
     "nuxt-security",
-    '@logto/nuxt',
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
-        config.plugins.push(vuetify({
-          autoImport: true
-        }))
-      })
-    },
+    'vuetify-nuxt-module',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
 
   security: {
@@ -162,23 +156,43 @@ export default defineNuxtConfig({
       commerceGraphql: process.env.COMMERCE_GRAPHQL_URL,
       commerceApiToken: process.env.WEBSITE_TOKEN,
 
-      // Google Tag Manager
-      gtagId: process.env.NUXT_PUBLIC_GTAG_ID,
+      ups: {
+        apiKey: process.env.UPS_API_KEY,
+        apiUrl: process.env.UPS_API_URL || 'https://onlinetools.ups.com/api'
+      },
 
-      // Stripe
+      fedex: {
+        apiKey: process.env.FEDEX_API_KEY,
+        apiUrl: process.env.FEDEX_API_URL
+      },
+
+      dhl: {
+        apiKey: process.env.DHL_API_KEY,
+        apiUrl: process.env.DHL_API_URL
+      },
+
+      payments: {
+        enabledProviders: process.env.PAYMENT_PROVIDERS?.split(',') || ['stripe', 'offline'],
+        defaultProvider: process.env.DEFAULT_PAYMENT_PROVIDER || 'stripe',
+        currency: process.env.DEFAULT_CURRENCY || 'USD'
+      },
+
       stripe: {
         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY
       },
 
-      logto: {
-        endpoint: process.env.NUXT_LOGTO_ENDPOINT,
-        appId: process.env.NUXT_LOGTO_APP_ID,
-        appSecret: process.env.NUXT_LOGTO_APP_SECRET,
-        cookieEncryptionKey: process.env.NUXT_LOGTO_COOKIE_ENCRYPTION_KEY,
-      },
+      // Magento 
+      commerceUrl: process.env.MAGE_STORE_URL,
+      commerceGraphql: process.env.MAGE_MAGENTO_GRAPHQL_URL,
+      commerceApiToken: process.env.WEBSITE_TOKEN,
     },
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY
+    },
+    paypal: {
+      clientId: process.env.PAYPAL_CLIENT_ID,
+      clientSecret: process.env.PAYPAL_CLIENT_SECRET,
+      sandbox: process.env.PAYPAL_SANDBOX === 'true'
     }
   },
 
