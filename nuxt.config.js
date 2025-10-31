@@ -1,4 +1,3 @@
-import graphql from '@rollup/plugin-graphql'
 import {
   defineNuxtConfig
 } from "nuxt/config"
@@ -219,8 +218,7 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
-    logLevel: 'info',
-    plugins: [graphql()]
+    logLevel: 'info'
   },
 
   nitro: {
