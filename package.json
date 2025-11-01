@@ -29,13 +29,12 @@
       "@types/graphql": "latest",
       "@vueuse/core": "latest",
       "@vueuse/nuxt": "latest",
-      "graphql": "latest",
+      "graphql": "^16.11.0",
       "graphql-tag": "latest",
       "nuxt": "latest",
       "typescript": "latest"
    },
    "dependencies": {
-      "@apollo/client": "latest",
       "@directus/sdk": "latest",
       "@directus/types": "latest",
       "@fortawesome/fontawesome-free": "latest",
@@ -53,6 +52,7 @@
       "@stripe/stripe-js": "^8.2.0",
       "@types/leaflet": "latest",
       "@types/lodash-es": "latest",
+      "@urql/vue": "^2.0.0",
       "@vue/apollo-composable": "^4.2.2",
       "eslint": "latest",
       "instantsearch.css": "^8.6.0",
