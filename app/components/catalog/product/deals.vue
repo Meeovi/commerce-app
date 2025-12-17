@@ -28,36 +28,31 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useQuery } from '@vue/apollo-composable'
-import { gql } from 'graphql-tag'
 import productCard from './productCard.vue'
 
-const PRODUCTS_UNDER_20_QUERY = gql`
-  query ProductsUnder20 {
-    products(options: { filter: { price: { lte: 20.00 } }, take: 10 }) {
-      items {
-        id
-        name
-        price
-        currencyCode
-        featuredAsset {
-          preview
-        }
-        brand {
-          id
-          name
-        }
-        assets {
-          id
-          preview
+  const model = ref(null)
+  const {
+    $directus,
+    $readItems
+  } = useNuxtApp()
+
+  const {
+    data: deals
+  } = await useAsyncData('deals', () => {
+    return $directus.request($readItems('products', {
+      fields: ['*',
+        'products.products_id.*',
+        'products.products_id.image.*',
+        'currency.currency_id.*',
+        'brands.brands_id.*',
+        'image.*',
+      ],
+      limit: 10,
+      filter: {
+        price: {
+          _lte: "20.00"
         }
       }
-    }
-  }
-`
-
-const model = ref(null)
-const { result, loading, error } = useQuery(PRODUCTS_UNDER_20_QUERY)
-const deals = computed(() => result.value?.products?.items || [])
+    }))
+  })
 </script>

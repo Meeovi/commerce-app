@@ -1,119 +1,54 @@
 <template>
-    <v-row justify="center">
-        <v-dialog v-model="dialog" :scrim="false" transition="dialog-bottom-transition">
-            <template v-slot:activator="{ props }">
-                <v-btn v-bind="props" class="rightAddBtn">
-                    <v-icon start icon="fas:fa fa-plus"></v-icon>Add Attribute
-                </v-btn>
-            </template>
-            <v-card>
-                <form>
-                    <v-toolbar dark color="primary">
-                        <v-btn icon dark @click="dialog = false">
-                            <v-icon icon="fas:fa fa-circle-xmark"></v-icon>
-                        </v-btn>
-                        <v-card-title>
-                            <span class="text-h6">Create new Attribute</span>
-                        </v-card-title>
-                    </v-toolbar>
-                    <v-card-text>
-                        <v-container>
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-text-field v-model="name" id="attributeName" label="Attribute Name*" required></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="slug" id="attributeSlug" label="Attribute Slug*" required></v-text-field>
-                                </v-col>
-                                <v-col cols="6">
-                                    <v-text-field v-model="type" label="Attribute Type" id="attributeType"></v-text-field>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                        <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-                            Close
-                        </v-btn>
-                        <v-btn color="blue-darken-1" variant="text" @click="dialog = false" @submit.prevent="createAttribute">
-                            Save
-                        </v-btn>
-                    </v-card-actions>
-                </form>
-            </v-card>
-        </v-dialog>
-    </v-row>
+  <v-row justify="center">
+    <v-dialog v-model="dialog" :scrim="false" transition="dialog-bottom-transition">
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props" class="rightAddBtn">
+          <v-icon start icon="fas:fa fa-plus"></v-icon>Create a Attribute
+        </v-btn>
+      </template>
+      <v-card class="b-1">
+        <v-card-title>
+          <h3>Create New Attribute</h3>
+        </v-card-title>
+
+        <v-card-text>
+          <div v-if="formError" class="error">{{ formError }}</div>
+          <div v-else-if="formSuccess" class="success">{{ formSuccess }}</div>
+          <form @submit.prevent="submitForm">
+            <DirectusFormElement v-for="field in attributeFields" :key="field.field" :field="field" v-model="form[field.field]" />
+            <v-btn type="submit">Submit</v-btn>
+          </form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </v-row>
+
 </template>
 
-<script>
-    export default {
-        data() {
-            return {
-                dialog: false,
-                notifications: false,
-                sound: true,
-                widgets: false,
-            }
-        },
-    }
-</script>
-
 <script setup>
-    import {
-        ref
-    } from 'vue'
-    import { useRuntimeConfig } from '#imports';
+import { ref } from 'vue'
+import DirectusFormElement from '#shared/app/components/forms/DirectusFormElement.vue'
+import { useDirectusForm } from '#shared/app/composables/globals/useDirectusForm'
 
-    const config = useRuntimeConfig();
-    const name = ref('');
-    const slug = ref('');
-    const type = ref('');
-    const errorMessage = ref('');
-    const successMessage = ref('');
+const dialog = ref(false)
+const { $directus, $readFieldsByCollection } = useNuxtApp()
 
-    const createAttribute = async () => {
-        try {
-            const response = await $fetch(`${config.public.wordpressUrl}/wp-json/dokan/v1/products/attributes`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${config.public.wordpressToken}`
-                },
-                body: JSON.stringify({
-                    name: name.value,
-                    slug: slug.value,
-                    type: type.value,
-                    status: 'publish',
-                })
-            })
+const { data, error } = await useAsyncData('attributes', async () => {
+  return $directus.request($readFieldsByCollection('attributes'))
+})
 
-            console.log(response);
+// guard against undefined/null data.value and empty arrays
+if (error.value || data.value == null || (data.value?.length ?? 0) === 0) {
+  console.error(error)
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Attribute not found'
+  })
+}
 
-            if (response.id) {
-                successMessage.value = 'Attribute created successfully!'
-                errorMessage.value = ''
-            } else {
-                throw new Error('Failed to create attribute')
-            }
-        } catch (error) {
-            console.error('Error creating attribute:', error);
-            if (error.response) {
-                console.error('Error response:', error.response);
-                if (error.response.status === 403) {
-                    errorMessage.value = 'You do not have permission to create a attribute.'
-                } else {
-                    errorMessage.value = `Error: ${error.response.status} ${error.response.statusText}`
-                }
-            } else {
-                errorMessage.value = error.message
-            }
-            successMessage.value = ''
-        }
-    }
+const attributeFields = data
 
-    useHead({
-        title: 'Create Attribute',
-    })
+
+// use composable for form handling (validation, submit, provide context)
+const { form, formError, formSuccess, submitForm } = useDirectusForm('attributes', attributeFields, { clearOnSuccess: true, closeDialogRef: dialog })
 </script>

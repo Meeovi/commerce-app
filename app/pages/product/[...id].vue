@@ -245,14 +245,14 @@
     ref,
     computed
   } from 'vue';
-  import comments from '#social/app/components/comments.vue'
+  import comments from '#social/app/components/blocks/comments.vue'
 
   import productDetails from '../../components/catalog/product/productDetails.vue'
   import productSpecs from '../../components/catalog/product/productSpecs.vue'
   import productCard from '../../components/catalog/product/productCard.vue'
   import giftCard from '../../components/catalog/product/giftCard.vue'
-  import short from '#social/app/components/vibez/shorts.vue'
-  import spaces from '#social/app/components/spaces/spaces.vue'
+  import short from '#social/app/components/related/short.vue'
+  import spaces from '#social/app/components/related/space.vue'
   import shop from '../../components/catalog/shops/stores.vue'
 
   const tab = ref(null);

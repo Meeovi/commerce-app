@@ -7,14 +7,14 @@
     <v-col cols="12">
       <div class="d-flex align-center mb-4">
         <div class="d-flex align-center">
-          <SfButton square variant="secondary" :disabled="count <= min" @click="dec()" size="sm">
+          <v-btn square variant="secondary" :disabled="count <= min" @click="dec()" size="sm">
             <SfIconRemove />
-          </SfButton>
+          </v-btn>
           <input :id="inputId" type="number" :min="min" :max="max" class="mx-2 w-16 text-center" :value="count"
             @change="handleOnChange" :disabled="!isValidProduct" />
-          <SfButton square variant="secondary" :disabled="count >= max" @click="inc()" size="sm">
+          <v-btn square variant="secondary" :disabled="count >= max" @click="inc()" size="sm">
             <SfIconAdd />
-          </SfButton>
+          </v-btn>
         </div>
       </div>
     </v-col>
@@ -23,7 +23,6 @@
 
 <script setup>
   import {
-    SfButton,
     SfIconRemove,
     SfIconAdd,
     useId,

@@ -155,7 +155,7 @@
   import setOrderBillingAddressMutation from '#graphql/app/commerce/mutations/setOrderBillingAddress.gql';
   import getCountryListQuery from '#graphql/app/commerce/queries/getCountryList.gql';
   import { useVendureQuery } from '../../composables/useVendureQuery';
-  import { useNotification } from '#shared/app/composables/useNotifications';
+  import { useNotification } from '~//composables/useNotifications';
   
   const emit = defineEmits(['address-saved', 'address-error', 'form-reset']);
   const { showNotification } = useNotification();

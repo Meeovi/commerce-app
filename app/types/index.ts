@@ -2,6 +2,66 @@
 
 // Re-export Order types
 export * from './Order.type'
+export type Money = string | number;
+
+export interface VariationNode {
+  databaseId: number;
+  salePrice: Money;
+  regularPrice: Money;
+  stockQuantity?: number;
+  image?: { sourceUrl: string };
+}
+
+export interface Variation {
+  node: VariationNode;
+  attributes: Array<{ value: string }>;
+}
+
+export interface ProductNode {
+  sku: string;
+  slug: string;
+  name: string;
+}
+
+export interface Product {
+  id: string;
+  sku?: string;
+  slug?: string;
+  name?: string;
+  description?: string;
+  images?: Array<{ sourceUrl?: string }>;
+  price?: number;
+  regularPrice?: number;
+  salePrice?: number;
+  attributes?: Array<{ name: string; value: string }>;
+  variations?: ProductVariant[];
+}
+
+export interface ProductVariant {
+  id: string;
+  sku?: string;
+  price?: number;
+  regularPrice?: number;
+  salePrice?: number;
+  stockQuantity?: number;
+  image?: { sourceUrl?: string };
+  attributes?: Array<{ name: string; value: string }>;
+}
+
+export interface CartItemNode {
+  key: string;
+  quantity: number;
+  product: { node: ProductNode };
+  variation: Variation;
+}
+
+export interface AddToCartResponse {
+  addToCart: { cartItem: CartItemNode };
+}
+
+export type AddBtnStatus = 'add' | 'loading' | 'added';
+
+export type RemoveBtnStatus = 'remove' | 'loading';
 
 // Customer types
 export interface Customer {
@@ -32,6 +92,21 @@ export interface Company {
 }
 
 // Return types
+export interface Refund {
+  id: string
+  refund_number?: string
+  order_id?: string
+  return_id?: string
+  transaction_id?: string
+  amount: number
+  currency: string
+  reason?: string
+  status: 'pending' | 'processed' | 'refunded' | 'failed' | 'cancelled'
+  metadata?: Record<string, any>
+  created_at: string
+  updated_at: string
+}
+
 export interface Return {
   id: string
   return_number: string
@@ -97,6 +172,22 @@ export interface InvoiceItem {
   quantity: number
   unit_price: number
   total: number
+}
+
+export interface Payment {
+  id: string
+  payment_number?: string
+  invoice_id?: string
+  order_id?: string
+  customer_id?: string
+  amount: number
+  currency: string
+  method: string
+  transaction_id?: string
+  status: 'pending' | 'completed' | 'failed' | 'refunded' | 'cancelled'
+  gateway_response?: Record<string, any>
+  created_at: string
+  updated_at: string
 }
 
 // Credit Memo types

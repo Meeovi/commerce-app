@@ -16,22 +16,22 @@
                             </span>
                         </div>
                         <p class="productRatings">
-                            <SfRating size="lg" :half-increment="true" :value="product?.customFields?.rating || 0" :max="5" />
-                            <SfLink href="#" variant="secondary" class="ratingReviews ml-2 text-xs text-neutral-500">
+                            <v-rating size="lg" :half-increment="true" :value="product?.customFields?.rating || 0" :max="5" />
+                            <NuxtLink to="#" variant="secondary" class="ratingReviews ml-2 text-xs text-neutral-500">
                                 {{ product?.customFields?.reviewCount || 0 }} reviews
-                            </SfLink>
+                            </NuxtLink>
                         </p>
                         <div class="py-4 mb-4 border-gray-200 border-y">
                             <div class="row items-start xs:flex">
                                 <div class="col col-6 flex flex-col items-stretch xs:items-center xs:inline-flex">
                                     <div class="flex border border-neutral-300 rounded-md">
-                                        <SfButton variant="tertiary" :disabled="count <= min" square class="rounded-r-none p-3" :aria-controls="inputId" aria-label="Decrease value" @click="dec()">
+                                        <v-btn variant="flat" :disabled="count <= min" square class="rounded-r-none p-3" :aria-controls="inputId" aria-label="Decrease value" @click="dec()">
                                             <SfIconRemove />
-                                        </SfButton>
+                                        </v-btn>
                                         <input :id="inputId" v-model="count" type="number" class="grow appearance-none mx-2 w-8 text-center bg-transparent font-medium" :min="min" :max="max" @input="handleOnChange" />
-                                        <SfButton variant="tertiary" :disabled="count >= max" square class="rounded-l-none p-3" :aria-controls="inputId" aria-label="Increase value" @click="inc()">
+                                        <v-btn variant="flat" :disabled="count >= max" square class="rounded-l-none p-3" :aria-controls="inputId" aria-label="Increase value" @click="inc()">
                                             <SfIconAdd />
-                                        </SfButton>
+                                        </v-btn>
                                     </div>
                                     <p class="self-center mt-1 mb-4 text-xs text-neutral-500 xs:mb-0">
                                         <strong class="text-neutral-900">{{ product?.stockOnHand }}</strong> in stock
@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { SfButton, SfLink, SfIconAdd, SfIconRemove, useId, SfRating } from '@storefront-ui/vue';
+import { SfIconAdd, SfIconRemove, useId } from '@storefront-ui/vue';
 import { clamp } from '@storefront-ui/shared';
 import { useCounter } from '@vueuse/core';
 import addToCartBtn from '../../partials/addToCartBtn.vue';

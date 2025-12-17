@@ -25,43 +25,10 @@
       "gqlg": "npx gqlg --schemaFilePath graphql/schema.graphql --destDirPath graphql/framework --depthLimit 2"
    },
    "devDependencies": {
-      "@nuxtjs/turnstile": "latest",
-      "@types/graphql": "latest",
-      "@vueuse/core": "latest",
-      "@vueuse/nuxt": "latest",
-      "graphql": "^16.11.0",
-      "graphql-tag": "latest",
-      "nuxt": "latest",
-      "typescript": "latest"
+      "nuxt": "latest"
    },
    "dependencies": {
-      "@directus/sdk": "latest",
-      "@directus/types": "latest",
-      "@fortawesome/fontawesome-free": "latest",
-      "@fortawesome/fontawesome-svg-core": "latest",
-      "@fortawesome/free-solid-svg-icons": "latest",
-      "@fortawesome/vue-fontawesome": "latest",
-      "@mdi/font": "latest",
-      "@meilisearch/instant-meilisearch": "^0.28.0",
-      "@nuxt/image": "latest",
-      "@nuxtjs/i18n": "latest",
-      "@nuxtjs/leaflet": "latest",
-      "@nuxtjs/tailwindcss": "latest",
-      "@pinia/nuxt": "latest",
-      "@storefront-ui/nuxt": "latest",
-      "@stripe/stripe-js": "^8.2.0",
-      "@types/leaflet": "latest",
-      "@types/lodash-es": "latest",
-      "@urql/vue": "^2.0.0",
-      "@vue/apollo-composable": "^4.2.2",
-      "eslint": "latest",
-      "instantsearch.css": "^8.6.0",
-      "meilisearch": "^0.54.0",
-      "nuxt-security": "latest",
-      "pinia": "latest",
-      "video.js": "latest",
-      "vite-plugin-vuetify": "latest",
-      "vue-instantsearch": "^4.22.0",
-      "vuetify-nuxt-module": "latest"
+      "@paypal/paypal-js": "^9.0.1",
+      "@storefront-ui/nuxt": "latest"
    }
 }

@@ -39,42 +39,19 @@
 
             <!-- Add Rewards Form -->
             <v-col cols="12">
-                <v-card>
-                    <v-card-title>Add Rewards</v-card-title>
+                <v-card class="b-1">
+                    <v-card-title>
+                        <h3>Create New Reward</h3>
+                    </v-card-title>
+
                     <v-card-text>
-                        <v-form ref="form" v-model="valid" @submit.prevent="handleSubmit">
-                            <v-row>
-                                <v-col cols="12" md="6">
-                                    <v-text-field v-model="formData.cartId" label="Cart ID" required
-                                        :rules="[v => !!v || 'Cart ID is required']"></v-text-field>
-                                </v-col>
-
-                                <v-col cols="12" md="6">
-                                    <v-text-field v-model="formData.points" label="Points to Add" type="number" required
-                                        :rules="[
-                        v => !!v || 'Points are required',
-                        v => v > 0 || 'Points must be greater than 0'
-                      ]"></v-text-field>
-                                </v-col>
-
-                                <v-col cols="12">
-                                    <v-textarea v-model="formData.comment" label="Comment (Optional)"
-                                        rows="3"></v-textarea>
-                                </v-col>
-                            </v-row>
-
-                            <!-- Action Buttons -->
-                            <v-row>
-                                <v-col cols="12" class="text-right">
-                                    <v-btn color="error" class="mr-4" @click="resetForm">
-                                        Reset
-                                    </v-btn>
-                                    <v-btn color="primary" type="submit" :loading="loading" :disabled="!valid">
-                                        Add Rewards
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-form>
+                        <div v-if="formError" class="error">{{ formError }}</div>
+                        <div v-else-if="formSuccess" class="success">{{ formSuccess }}</div>
+                        <form @submit.prevent="submitForm">
+                            <DirectusFormElement v-for="field in rewardFields" :key="field.field" :field="field"
+                                v-model="form[field.field]" />
+                            <v-btn type="submit">Submit</v-btn>
+                        </form>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -119,27 +96,19 @@
     } from 'vue';
     import {
         getRewardBalance,
-        useRewardPoints,
         getRewardHistory,
-        getRewardRates,
-        calculateRewardPoints
-    } from '#commerce/app/composables/commerce/marketing/useReward';
+        getRewardRates    } from '#commerce/app/composables/commerce/marketing/useReward';
+    import DirectusFormElement from '#shared/app/components/forms/DirectusFormElement.vue'
+    import {
+        useDirectusForm
+    } from '#shared/app/composables/globals/useDirectusForm'
 
     // State
     const currentBalance = ref(0);
     const rewardRates = ref(null);
     const rewardHistory = ref([]);
-    const loading = ref(false);
     const loadingHistory = ref(false);
-    const valid = ref(false);
-    const form = ref(null);
-
-    const formData = ref({
-        cartId: '',
-        points: '',
-        comment: ''
-    });
-
+    const dialog = ref(false);
     const snackbar = ref({
         show: false,
         message: '',
@@ -200,48 +169,40 @@
         }
     };
 
-    const handleSubmit = async () => {
-        if (!valid.value) return;
+    const {
+        $directus,
+        $readFieldsByCollection
+    } = useNuxtApp()
 
-        loading.value = true;
-        try {
-            // Calculate potential points first
-            const potentialPoints = await calculateRewardPoints(formData.value.cartId);
+    const {
+        data,
+        error
+    } = await useAsyncData('rewards', async () => {
+        return $directus.request($readFieldsByCollection('rewards'))
+    })
 
-            // Apply rewards
-            await useRewardPoints(formData.value.cartId);
+    // guard against undefined/null data.value and empty arrays
+    if (error.value || data.value == null || (data.value?.length ?? 0) === 0) {
+        console.error(error)
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'Reward not found'
+        })
+    }
 
-            // Refresh balance and history
-            await loadInitialData();
+    const rewardFields = data
 
-            showSuccess('Rewards added successfully');
-            resetForm();
-        } catch (error) {
-            showError('Error adding rewards');
-            console.error('Error adding rewards:', error);
-        } finally {
-            loading.value = false;
-        }
-    };
+    // use composable for form handling (validation, submit, provide context)
+    const {
+        form,
+        formError,
+        formSuccess,
+        submitForm
+    } = useDirectusForm('rewards', rewardFields, {
+        clearOnSuccess: true,
+        closeDialogRef: dialog
+    })
 
-    const resetForm = () => {
-        if (form.value) {
-            form.value.reset();
-        }
-        formData.value = {
-            cartId: '',
-            points: '',
-            comment: ''
-        };
-    };
-
-    const showSuccess = (message) => {
-        snackbar.value = {
-            show: true,
-            message,
-            color: 'success'
-        };
-    };
 
     const showError = (message) => {
         snackbar.value = {

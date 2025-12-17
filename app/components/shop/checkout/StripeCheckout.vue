@@ -1,16 +1,16 @@
 <template>
   <div>
     <h1>Checkout</h1>
-    <SfButton @click="startCheckout" :disabled="loading || !clientSecret">
+    <v-btn @click="startCheckout" :disabled="loading || !clientSecret">
       Pay with Stripe
-    </SfButton>
+    </v-btn>
     <StripeCardElement v-if="clientSecret" :clientSecret="clientSecret" @payment-success="onPaymentSuccess" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { SfButton } from '@storefront-ui/vue';
+import { v-btn } from '@storefront-ui/vue';
 import { useVendureQuery } from '@/app/composables/useVendureQuery';
 import { useVendureMutation } from '@/app/composables/useVendureMutation';
 import createStripePaymentIntentMutation from '#graphql/app/commerce/mutations/createStripePaymentIntent.gql';

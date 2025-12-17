@@ -1,11 +1,8 @@
 <template>
-    <SfRating size="lg" :half-increment="true" :value="(rating?.rating)" :max="5" />
+    <v-rating size="lg" :half-increment="true" :model-value="(rating?.rating)" :max="5" />
 </template>
 
 <script setup>
-    import {
-        SfRating
-    } from '@storefront-ui/vue';
 
     const props = defineProps({
         rating: {

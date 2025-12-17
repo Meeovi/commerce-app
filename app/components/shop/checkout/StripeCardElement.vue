@@ -49,16 +49,16 @@
       </v-col>
     </v-row>
     <v-checkbox v-model="saveCard" label="Save card for future payments (secure)" class="mb-4" />
-    <SfButton type="submit" :disabled="loading || !cardReady" aria-busy="loading">
+    <v-btn type="submit" :disabled="loading || !cardReady" aria-busy="loading">
       <span v-if="loading">Processing...</span>
       <span v-else>Pay</span>
-    </SfButton>
+    </v-btn>
   </v-form>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
-import { SfButton } from '@storefront-ui/vue';
+import { v-btn } from '@storefront-ui/vue';
 import { useUserStore } from '../../stores/user';
 import { useDirectusAuth } from '../../../../../composables/useDirectusAuth';
 import countryList from '../../utils/countryList'; // Assume this is an array of country codes/names

@@ -27,11 +27,11 @@
                                     <div class="mbr-section-btn">
                                         <div class="flex border border-neutral-300 rounded-md">
                                             <!-- Decrease Quantity -->
-                                            <SfButton variant="tertiary" :disabled="count <= min" square
+                                            <v-btn variant="tertiary" :disabled="count <= min" square
                                                 class="rounded-r-none p-3" :aria-controls="inputId"
                                                 aria-label="Decrease quantity" @click="handleDecrease">
                                                 <SfIconRemove />
-                                            </SfButton>
+                                            </v-btn>
 
                                             <!-- Quantity Input -->
                                             <input :id="inputId" v-model="count" type="number"
@@ -40,11 +40,11 @@
                                                 aria-label="Product quantity" />
 
                                             <!-- Increase Quantity -->
-                                            <SfButton variant="tertiary" :disabled="count >= max" square
+                                            <v-btn variant="tertiary" :disabled="count >= max" square
                                                 class="rounded-l-none p-3" :aria-controls="inputId"
                                                 aria-label="Increase quantity" @click="handleIncrease">
                                                 <SfIconAdd />
-                                            </SfButton>
+                                            </v-btn>
                                         </div>
                                         <!-- Stock Information -->
                                         <p class="self-center mt-1 mb-4 text-xs text-neutral-500 xs:mb-0">
@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import { SfButton, SfIconAdd, SfIconRemove, useId } from '@storefront-ui/vue';
+import {  SfIconAdd, SfIconRemove, useId } from '@storefront-ui/vue';
 import { useVendureMutation } from '../../composables/useVendureMutation';
 import adjustOrderLineMutation from '#graphql/app/commerce/mutations/adjustOrderLine.gql';
 import removeOrderLineMutation from '#graphql/app/commerce/mutations/removeOrderLine.gql';
